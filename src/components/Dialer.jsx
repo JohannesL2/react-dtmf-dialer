@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 
     const DTMF_FREQUENCIES = {
         '1': [697, 1209],
@@ -57,6 +57,16 @@ export default function Dialer() {
 
     const clearDisplay = () => setPressedKeys([])
 
+    useEffect(() => {
+    const handleKeyDown = (e) => {
+        if ('1234567890*#'.includes(e.key)) {
+            playDTMF(e.key)
+        }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+   }, [])
 
   return (
     <div className='phone'>
