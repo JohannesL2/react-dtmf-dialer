@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 
     const DTMF_FREQUENCIES = {
         '1': [697, 1209],
@@ -19,9 +19,11 @@ import React, { useRef } from 'react'
 
 export default function Dialer() {
     const audioContextRef = useRef(null)
+    const [pressedKeys, setPressedKeys] = useState([])
 
     const playDTMF = (key, duration = 150) => {
         if (!DTMF_FREQUENCIES[key]) return
+        setPressedKeys(prev => [...prev, key])
 
         if (!audioContextRef.current) {
             audioContextRef.current =
@@ -53,9 +55,14 @@ export default function Dialer() {
         }, duration)
     }
 
+    const clearDisplay = () => setPressedKeys([])
 
 
   return (
+    <div className='phone'>
+        <div className='screen'>
+            {pressedKeys.join('') || ' '}
+        </div>
     <div className='dialer'>
         {keys.map((key) => (
             <button
@@ -66,6 +73,13 @@ export default function Dialer() {
                 {key}
             </button>
         ))}
+    </div>
+    <button 
+        className='clear' 
+        onClick={clearDisplay}
+        >
+            Clear
+        </button>
     </div>
   )
 }
