@@ -13,6 +13,28 @@
   flex-direction: column;
   align-items: center;
   font-family: 'Arial', sans-serif;
+  position: relative;
+}
+
+.phone::before {
+  content: '';
+  width: 60px;
+  height: 5px;
+  background-color: #444;
+  border-radius: 5px;
+  position: absolute;
+  top: 8px;
+}
+
+.phone::after {
+  content: '';
+  width: 15px;
+  height: 15px;
+  background-color: #555;
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  right: 30px;
 }
 
 .screen {
