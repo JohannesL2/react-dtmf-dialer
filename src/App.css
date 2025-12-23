@@ -70,8 +70,10 @@
 }
 
 .dialer button:active {
-  background-color: #d1d1d1;
-  transform: scale(0.96);
+  transform: translateY(4px);
+  box-shadow: 0 0 8px #0ff, 0 0 15px #0ff inset;
+  border: 1px solid #0ff;
+  color: #222;
 }
 
 .clear {
