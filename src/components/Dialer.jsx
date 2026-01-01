@@ -23,6 +23,9 @@ export default function Dialer() {
 
     const playDTMF = (key, duration = 150) => {
         if (!DTMF_FREQUENCIES[key]) return
+
+        if (document.activeElement.tagName === 'INPUT') return
+
         setPressedKeys(prev => [...prev, key])
 
         if (!audioContextRef.current) {
@@ -60,6 +63,7 @@ export default function Dialer() {
     useEffect(() => {
     const handleKeyDown = (e) => {
         if ('1234567890*#'.includes(e.key)) {
+            if (document.activeElement.tagName === 'INPUT') return
             playDTMF(e.key)
         }
     }
