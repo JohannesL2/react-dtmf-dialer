@@ -91,3 +91,42 @@
 .clear:hover {
   background-color: #0cc;
 }
+
+.numberInput {
+  background-color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 8px;
+  width: 280px;
+  margin: 20px auto;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  border-radius: 20px;
+}
+
+.numberInput input {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.numberInput button {
+  padding: 12px 20px;
+  border-radius: 10px;
+  background-color: rgb(59, 213, 97);
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+  border: 1px solid transparent;
+}
+
+.numberInput button:hover {
+  transform: scale(1.05);
+}
+
+.numberInput button:active {
+  border: 1px solid white;
+  transform: scale(0.98);
+}
