@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
+import NumberInput from './NumberInput'
 
     const DTMF_FREQUENCIES = {
         '1': [697, 1209],
@@ -20,13 +21,12 @@ import React, { useRef, useState, useEffect } from 'react'
 export default function Dialer() {
     const audioContextRef = useRef(null)
     const [pressedKeys, setPressedKeys] = useState([])
+    const [inputValue, setInputValue] = useState('')
 
     const playDTMF = (key, duration = 150) => {
         if (!DTMF_FREQUENCIES[key]) return
 
         if (document.activeElement.tagName === 'INPUT') return
-
-        setPressedKeys(prev => [...prev, key])
 
         if (!audioContextRef.current) {
             audioContextRef.current =
@@ -59,6 +59,18 @@ export default function Dialer() {
     }
 
     const clearDisplay = () => setPressedKeys([])
+
+    const handleSend = () => {
+        if (!inputValue) return
+        const sequence = inputValue.split('')
+        sequence.forEach((key, index) => {
+            setTimeout(() => {
+                playDTMF(key)
+                setPressedKeys(prev => [...prev, key])
+            }, index * 200)
+        })
+        setInputValue('')
+    }
 
     useEffect(() => {
     const handleKeyDown = (e) => {
@@ -94,6 +106,12 @@ export default function Dialer() {
         >
             Clear
         </button>
+
+        <NumberInput
+            inputValue={inputValue}
+            setInputValue={setInputValue}
+            handleSend={handleSend}
+        />
     </div>
   )
 }

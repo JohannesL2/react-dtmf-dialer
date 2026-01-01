@@ -1,6 +1,5 @@
 import './App.css'
 import Dialer from './components/Dialer'
-import NumberInput from './components/NumberInput'
 
 function App() {
 
@@ -9,7 +8,6 @@ function App() {
     <h1>Phone dialer using DTMF tones</h1>
 
     <Dialer />
-    <NumberInput />
     </>
   )
 }
