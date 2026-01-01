@@ -58,6 +58,11 @@ export default function Dialer() {
         }, duration)
     }
 
+    const handleButtonClick = (key) => {
+        setPressedKeys(prev => [...prev, key])
+        playDTMF(key)
+    }
+
     const clearDisplay = () => setPressedKeys([])
 
     const handleSend = () => {
@@ -93,7 +98,7 @@ export default function Dialer() {
         {keys.map((key) => (
             <button
                 key={key}
-                onClick={() => playDTMF(key)}
+                onClick={() => handleButtonClick(key)}
                 aria-label={`Dial ${key}`}
             >
                 {key}
